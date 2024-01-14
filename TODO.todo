@@ -1,0 +1,95 @@
+Account
+
+Create:
+
+POST: /account
+
+Read: 
+GET: /account (logged in account)
+GET: /accounts (with permission)
+GET /accounts/{account_id}/fields/{field_name} (permissions)
+
+Update:
+PATCH: /account/{account_id} //Update specific field
+PUT: /account/{account_id} // Update entire account
+
+account_type
+
+GET: /accounts/type (retrieve will be used in dashboard)
+//No need for post since it will be related to the backend so only the backend can add and remove
+
+address
+
+GET: /account/{account_id}/address
+POST: /account/{account_id}/address
+PUT: /account/{account_id}/address/{address_id} 
+
+
+address_type
+
+GET: /accounts/address/type 
+POST: /accounts/address/type
+
+phone
+
+GET: /account/{account_id}/phone
+POST: /account/{account_id}/phone
+PUT: /account/{account_id}/phone/{phone_id}
+
+phone_type
+
+GET: /accounts/phone/type
+POST: /accounts/phone/type
+
+
+countries
+
+GET: /countries
+
+
+product
+
+CRUD:
+POST /products: Create a new product.
+GET /products: Retrieve a list of products, optionally filtered and sorted.
+GET /products/{product_id}: Retrieve a specific product by its ID.
+PUT /products/{product_id}: Update an existing product.
+DELETE /products/{product_id}: Delete a product.
+
+GET /products/{product_id}/categories: Retrieve the categories associated with a product.
+GET /products/{product_id}/subcategories: Retrieve the subcategories associated with a product.
+GET /products/search: Search for products based on keywords or filters.
+
+
+
+product_category
+
+CRUD Operations:
+POST /products/categories: Create a new product category.
+GET /products/categories: Retrieve a list of product categories, optionally filtered and sorted.
+GET /products/categories/{category_id}: Retrieve a specific category by its ID.
+PUT /products/categories/{category_id}: Update an existing category.
+DELETE /products/categories/{category_id}: Delete a category (consider cascading effects on subcategories and products).
+
+GET /products/categories/{category_id}/subcategories: Retrieve subcategories within a category.
+
+product_subcategory
+
+CRUD Operations:
+POST /products/categories/subcategories: Create a new product subcategory.
+GET /products/categories/subcategories: Retrieve a list of product subcategories, optionally filtered and sorted.
+GET /products/categories/subcategories/{subcategory_id}: Retrieve a specific subcategory by its ID.
+PUT /products/categories/subcategories/{subcategory_id}: Update an existing subcategory.
+DELETE /products/categories/subcategories/{subcategory_id}: Delete a subcategory. 
+
+
+price
+
+POST /products/{product_id}/price
+GET: /products/{product_id}/price (with the latest date) looking also if the end-date has reached
+
+
+price_type
+
+GET /products/price/type
+//No need for post

@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "koa": "^2.15.0"
+  },
+  "name": "backend-ecommerce",
+  "description": "Backend for ecommerce website",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elie309/backend-ecommerce.git"
+  },
+  "keywords": [
+    "Ecommerce",
+    "website",
+    "online",
+    "store"
+  ],
+  "author": "Elie309",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Elie309/backend-ecommerce/issues"
+  },
+  "homepage": "https://github.com/Elie309/backend-ecommerce#readme"
+}
