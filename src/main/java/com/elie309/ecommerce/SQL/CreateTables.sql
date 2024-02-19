@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS address
 address_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 account_id 	INT UNSIGNED NOT NULL,
 address_type_id INT UNSIGNED DEFAULT 1,
-country_code CHAR(2) DEFAULT "LB",
+country_code CHAR(2) DEFAULT 'LB',
 
 state CHAR(50) NOT NULL,
 street CHAR(50) NOT NULL,
@@ -101,12 +101,12 @@ product_category_updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDA
 CREATE TABLE IF NOT EXISTS product_subcategory
 (
 product_subcategory_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-category_id INT UNSIGNED NOT NULL,
+product_category_id INT UNSIGNED NOT NULL,
 product_subcategory CHAR(50) NOT NULL,
 product_subcategory_created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 product_subcategory_updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-FOREIGN KEY (category_id) REFERENCES product_category(product_category_id)
+FOREIGN KEY (product_category_id) REFERENCES product_category(product_category_id)
 );
 
 

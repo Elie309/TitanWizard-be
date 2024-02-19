@@ -9,10 +9,34 @@ INSERT INTO address_type(address_type) VALUES ('home'), ('office'), ('work');
 
 
 #PRICE TYPE
-INSERT INTO price_type (price_type) VALUES ("standard"), ("offer"), ("discounted"), ("callForPrice");
+INSERT INTO price_type (price_type) VALUES ('standard'), ('offer'), ('discounted'), ('callForPrice');
 
 #Phone Type
 INSERT INTO phone_type(`phone_type`) VALUES ('mobile'), ('office'), ('work'), ('fax');
+
+INSERT INTO product_category (product_category) VALUES
+('Default'),
+('No Category'),
+('Electronics'),
+('Clothing'),
+('Home and Garden'),
+('Books'),
+('Toys and Games');
+
+
+INSERT INTO product_subcategory (product_category_id, product_subcategory) VALUES
+(1, 'Default'),
+(2, 'No Category'),
+(3, 'Smartphones'),
+(3, 'Laptops'),
+(4, 'Men\'s Apparel'),
+(5, 'Women\'s Apparel'),
+(5, 'Furniture'),
+(5, 'Kitchenware'),
+(6, 'Fiction'),
+(6, 'Non-Fiction'),
+(6, 'Board Games'),
+(7, 'Outdoor Toys');
 
 
 #COUNTRIES
