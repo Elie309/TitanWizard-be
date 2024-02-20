@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `account`
     account_type       INT UNSIGNED          DEFAULT 1,
 
     account_email      Text         NOT NULL,
-    account_password   INT UNSIGNED NOT NULL,
+    account_password   VARCHAR(255) NOT NULL,
 
     account_created_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     account_updated_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

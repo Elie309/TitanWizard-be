@@ -1,4 +1,4 @@
-package com.elie309.ecommerce.Models;
+package com.elie309.ecommerce.Models.ProductsModels;
 
 import java.sql.Timestamp;
 

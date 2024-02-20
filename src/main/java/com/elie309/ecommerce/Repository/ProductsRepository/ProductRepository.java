@@ -1,6 +1,8 @@
 package com.elie309.ecommerce.Repository.ProductsRepository;
 
-import com.elie309.ecommerce.Models.Product;
+import com.elie309.ecommerce.Models.ProductsModels.Product;
+import com.elie309.ecommerce.Repository.IRepository;
+import com.elie309.ecommerce.Repository.RepositoryUtils;
 import com.elie309.ecommerce.Utils.Response;
 import com.elie309.ecommerce.Utils.RowMapper.ProductRowMapper;
 import org.springframework.http.HttpStatus;
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ProductRepository implements IProductRepository {
+public class ProductRepository implements IRepository<Product> {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -33,25 +35,7 @@ public class ProductRepository implements IProductRepository {
          if(products.isEmpty()){
              return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
          }
-
          return new ResponseEntity<>(products.get(0), HttpStatus.OK);
-
-    }
-
-    @Override
-    public ResponseEntity<Product> update(Product product) {
-        String sql = "UPDATE product SET product_title = ?, product_description = ?, product_sku = ?, " +
-                "product_category_id = ?, product_subcategory_id = ? " +
-                "WHERE product_id = ?";
-        int res = jdbcTemplate.update(sql, product.getProductTitle(), product.getProductDescription(),
-                product.getProductSku(), product.getProductCategoryId(), product.getProductSubcategoryId(),
-                product.getProductId());
-
-        if(res == 1){
-            return new ResponseEntity<>(product, HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
     }
 
@@ -68,16 +52,26 @@ public class ProductRepository implements IProductRepository {
     }
 
     @Override
+    public ResponseEntity<Product> update(Product product) {
+        String sql = "UPDATE product SET product_title = ?, product_description = ?, product_sku = ?, " +
+                "product_category_id = ?, product_subcategory_id = ? " +
+                "WHERE product_id = ?";
+        int res = jdbcTemplate.update(sql, product.getProductTitle(), product.getProductDescription(),
+                product.getProductSku(), product.getProductCategoryId(), product.getProductSubcategoryId(),
+                product.getProductId());
+
+        if(res == 1){
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @Override
     public ResponseEntity<Response> delete(Long productId) {
         String sql = "DELETE FROM product WHERE product_id = ?";
-        int res = jdbcTemplate.update(sql, productId);
-        if(res != 0){
-            Response sucessfullyDeleted = new Response("Sucessfully deleted", true);
-            return new ResponseEntity<>(sucessfullyDeleted, HttpStatus.OK);
-        }else{
-            Response sucessfullyDeleted = new Response("Not deleted", false);
-            return new ResponseEntity<>(sucessfullyDeleted, HttpStatus.BAD_REQUEST);
-        }
+        return RepositoryUtils.getDeleteResponseEntity(productId, sql, jdbcTemplate);
 
     }
 

@@ -1,9 +1,8 @@
-package com.elie309.ecommerce.Controllers;
+package com.elie309.ecommerce.Controllers.ProductsController;
 
-import com.elie309.ecommerce.Models.Product;
+import com.elie309.ecommerce.Models.ProductsModels.Product;
 import com.elie309.ecommerce.Repository.ProductsRepository.ProductRepository;
 import com.elie309.ecommerce.Utils.Response;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,18 +35,8 @@ public class ProductController {
 
     @PutMapping("{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
-//        Product existingProduct = productRepository.findById(id).getBody();
-
-//        if (existingProduct != null) {
-
-            product.setProductId(id);
-
-            Product updatedProduct = productRepository.update(product).getBody();
-
-            return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
+        product.setProductId(id);
+        return productRepository.update(product);
     }
 
     @DeleteMapping("/{id}")
