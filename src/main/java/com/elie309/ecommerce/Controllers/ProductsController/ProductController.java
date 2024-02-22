@@ -3,6 +3,7 @@ package com.elie309.ecommerce.Controllers.ProductsController;
 import com.elie309.ecommerce.Models.ProductsModels.Product;
 import com.elie309.ecommerce.Repository.ProductsRepository.ProductRepository;
 import com.elie309.ecommerce.Utils.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,27 +21,28 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts() {
-        return productRepository.findAll();
+        return ResponseEntity.ok(productRepository.findAll());
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-        return productRepository.findById(id);
+        return ResponseEntity.ok(productRepository.findById(id));
     }
 
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        return productRepository.save(product);
+        return new ResponseEntity<>(productRepository.save(product), HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
         product.setProductId(id);
-        return productRepository.update(product);
+        return ResponseEntity.ok(productRepository.update(product));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteProduct(@PathVariable Long id) {
-        return productRepository.delete(id);
+        productRepository.delete(id);
+        return ResponseEntity.ok(new Response("Record Deleted",true));
     }
 }

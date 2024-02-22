@@ -2,13 +2,11 @@ package com.elie309.ecommerce.Repository.ProductsRepository;
 
 import com.elie309.ecommerce.Models.ProductsModels.Product;
 import com.elie309.ecommerce.Repository.IRepository;
-import com.elie309.ecommerce.Repository.RepositoryUtils;
-import com.elie309.ecommerce.Utils.Response;
 import com.elie309.ecommerce.Utils.RowMapper.ProductRowMapper;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -22,37 +20,42 @@ public class ProductRepository implements IRepository<Product> {
     }
 
     @Override
-    public ResponseEntity<List<Product>> findAll() {
+    public List<Product> findAll() {
         String sql = "SELECT * FROM product";
-        return new ResponseEntity<>(jdbcTemplate.query(sql, new ProductRowMapper()), HttpStatus.OK);
+        return jdbcTemplate.query(sql, new ProductRowMapper());
     }
 
     @Override
-    public ResponseEntity<Product> findById(Long productId) {
+    public Product findById(Long productId) {
         String sql = "SELECT * FROM product WHERE product_id = ?";
          List<Product> products = jdbcTemplate.query(sql, new ProductRowMapper(), productId);
 
          if(products.isEmpty()){
-             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Account not found");
          }
-         return new ResponseEntity<>(products.get(0), HttpStatus.OK);
+         return products.get(0);
 
     }
 
     @Override
-    public ResponseEntity<Product>  save(Product product) {
+    public Product save(Product product) {
         String sql = "INSERT INTO product (product_title, product_description, product_sku, " +
                 "product_category_id, product_subcategory_id) " +
                 "VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, product.getProductTitle(), product.getProductDescription(),
+        int res = jdbcTemplate.update(sql, product.getProductTitle(), product.getProductDescription(),
                 product.getProductSku(), product.getProductCategoryId(),
                 product.getProductSubcategoryId());
 
-        return new ResponseEntity<>(product, HttpStatus.CREATED);
+        if(res == 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product not saved");
+        }
+
+        return product;
+
     }
 
     @Override
-    public ResponseEntity<Product> update(Product product) {
+    public Product update(Product product) {
         String sql = "UPDATE product SET product_title = ?, product_description = ?, product_sku = ?, " +
                 "product_category_id = ?, product_subcategory_id = ? " +
                 "WHERE product_id = ?";
@@ -60,19 +63,23 @@ public class ProductRepository implements IRepository<Product> {
                 product.getProductSku(), product.getProductCategoryId(), product.getProductSubcategoryId(),
                 product.getProductId());
 
-        if(res == 1){
-            return new ResponseEntity<>(product, HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if(res == 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product not updated");
         }
+
+        return product;
+
 
     }
 
     @Override
-    public ResponseEntity<Response> delete(Long productId) {
+    public void delete(Long productId) {
         String sql = "DELETE FROM product WHERE product_id = ?";
-        return RepositoryUtils.getDeleteResponseEntity(productId, sql, jdbcTemplate);
+        int res = jdbcTemplate.update(sql, productId);
 
+        if(res == 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not Found");
+        }
     }
 
 }
