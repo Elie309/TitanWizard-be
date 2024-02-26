@@ -1,6 +1,7 @@
 package com.elie309.ecommerce.Utils.RowMapper;
 
 import com.elie309.ecommerce.Models.AccountsModels.Account;
+import com.elie309.ecommerce.Models.AccountsModels.AccountType;
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,11 +16,16 @@ public class AccountRowMapper implements RowMapper<Account> {
             account.setAccountFirstname(rs.getString("account_firstname"));
             account.setAccountMiddlename(rs.getString("account_middlename"));
             account.setAccountLastname(rs.getString("account_lastname"));
-            account.setAccountType(rs.getLong("account_type"));
             account.setAccountEmail(rs.getString("account_email"));
             account.setAccountPassword(rs.getString("account_password"));
             account.setAccountCreatedAt(rs.getTimestamp("account_created_at"));
             account.setAccountUpdatedAt(rs.getTimestamp("account_updated_at"));
+
+            AccountTypeRowMapper accountTypeRowMapper = new AccountTypeRowMapper();
+            AccountType accountType = accountTypeRowMapper.mapRow(rs, rowNum);
+            account.setAccountType(accountType);
+
+
         } catch (SQLException e) {
             //TODO: Handle SQLException appropriately, e.g., logging or throwing a custom exception
         }

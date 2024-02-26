@@ -12,9 +12,7 @@ public class AccountTypeRowMapper implements RowMapper<AccountType> {
         AccountType accountType = new AccountType();
         try {
             accountType.setAccountTypeId(rs.getLong("account_type_id"));
-            accountType.setAccountType(rs.getString("account_type"));
-            accountType.setAccountTypeCreatedAt(rs.getTimestamp("account_type_created_at"));
-            accountType.setAccountTypeUpdatedAt(rs.getTimestamp("account_type_updated_at"));
+            accountType.setAccountTypeRole(rs.getString("account_type_role"));
         } catch (SQLException e) {
             //TODO: Handle SQLException appropriately, e.g., logging or throwing a custom exception
         }

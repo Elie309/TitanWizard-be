@@ -6,6 +6,8 @@ import com.elie309.ecommerce.Utils.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @RestController
@@ -25,21 +27,23 @@ public class AccountController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Account> getAccountById(@PathVariable Long id) {
-        return ResponseEntity.ok(accountRepository.findById(id));
-    }
 
-    @PostMapping
-    public ResponseEntity<Account> createAccount(@RequestBody Account account) {
-        Account newAccount = accountRepository.save(account);
-        return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
+        Account account = accountRepository.findById(id);
+
+        if(account == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Record not found");
+        }
+
+        return ResponseEntity.ok(account);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Account> updateAccount(@PathVariable Long id, @RequestBody Account account) {
         account.setAccountId(id);
         Account newAccount = accountRepository.update(account);
-        return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
+        return new ResponseEntity<>(newAccount, HttpStatus.OK);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteAccount(@PathVariable Long id) {

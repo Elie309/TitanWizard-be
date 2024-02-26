@@ -1,12 +1,17 @@
 package com.elie309.ecommerce.Models.AccountsModels;
 
-import java.sql.Timestamp;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AccountType {
+    @JsonIgnore
     private Long accountTypeId;
-    private String accountType;
-    private Timestamp accountTypeCreatedAt;
-    private Timestamp accountTypeUpdatedAt;
+
+    @JsonAlias("accountTypeRole")
+    @JsonProperty("role")
+    private String accountTypeRole;
+
 
     public AccountType() {}
 
@@ -18,27 +23,14 @@ public class AccountType {
         this.accountTypeId = accountTypeId;
     }
 
-    public String getAccountType() {
-        return accountType;
+    public String getAccountTypeRole() {
+        return accountTypeRole;
     }
 
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
+    public void setAccountTypeRole(String accountTypeRole) {
+        accountTypeRole = "ROLE_"+ accountTypeRole;
+        this.accountTypeRole = accountTypeRole.toUpperCase();
     }
 
-    public Timestamp getAccountTypeCreatedAt() {
-        return accountTypeCreatedAt;
-    }
 
-    public void setAccountTypeCreatedAt(Timestamp accountTypeCreatedAt) {
-        this.accountTypeCreatedAt = accountTypeCreatedAt;
-    }
-
-    public Timestamp getAccountTypeUpdatedAt() {
-        return accountTypeUpdatedAt;
-    }
-
-    public void setAccountTypeUpdatedAt(Timestamp accountTypeUpdatedAt) {
-        this.accountTypeUpdatedAt = accountTypeUpdatedAt;
-    }
 }
