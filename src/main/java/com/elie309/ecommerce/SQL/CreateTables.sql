@@ -4,27 +4,25 @@ USE ecommerce;
 CREATE TABLE IF NOT EXISTS account_type
 (
     account_type_id         INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    account_type            CHAR(30) UNIQUE NOT NULL,
-    account_type_created_at TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    account_type_updated_at TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    account_type_role       CHAR(30) UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `account`
 (
     account_id         INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    account_firstname  CHAR(30)     NOT NULL,
-    account_middlename CHAR(30)     NULL,
-    account_lastname   CHAR(30)     NOT NULL,
+    account_firstname  CHAR(30)            NOT NULL,
+    account_middlename CHAR(30)            NULL,
+    account_lastname   CHAR(30)            NOT NULL,
 
-    account_type       INT UNSIGNED          DEFAULT 1,
+    account_type_id    INT UNSIGNED                 DEFAULT 1,
 
-    account_email      VARCHAR(255) UNIQUE  NOT NULL,
-    account_password   VARCHAR(255) NOT NULL,
+    account_email      VARCHAR(255) UNIQUE NOT NULL,
+    account_password   VARCHAR(255)        NOT NULL,
 
-    account_created_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    account_updated_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    account_created_at TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    account_updated_at TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (`account_type`) REFERENCES `account_type` (`account_type_id`)
+    FOREIGN KEY (`account_type_id`) REFERENCES `account_type` (`account_type_id`)
 
 );
 
@@ -131,7 +129,7 @@ CREATE TABLE IF NOT EXISTS product
 ##### PRICE ######
 
 
-CREATE TABLE price_type
+CREATE TABLE IF NOT EXISTS price_type
 (
     price_type_id         INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     price_type            CHAR(50)  NOT NULL UNIQUE,

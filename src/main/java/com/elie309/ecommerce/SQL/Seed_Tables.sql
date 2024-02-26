@@ -1,31 +1,7 @@
 Use ecommerce;
 
-INSERT INTO account (account_firstname, account_middlename, account_lastname, account_type, account_email, account_password)
-VALUES
-    ('Emma', 'Rose', 'Brown', 1, 'emma@example.com', 'password123'), -- User
-    ('Oliver', 'Jacob', 'Wilson', 2, 'oliver@example.com', 'password123'), -- Corporate
-    ('Lily', 'Sophia', 'Martinez', 3, 'lily@example.com', 'password123'), -- Dealer
-    ('Benjamin', 'James', 'Lee', 5, 'benjamin@example.com', 'password123'), -- Admin
-    ('William', NULL, 'Taylor', 4, 'william@example.com', 'password123'), -- Employee
-    ('Sophie', 'Grace', 'Walker', 4, 'sophie@example.com', 'password123'), -- Employee
-    ('Jack', 'Noah', 'Hall', 4, 'jack@example.com', 'password123'), -- Employee
-    ('Charlotte', 'Lily', 'Lewis', 4, 'charlotte@example.com', 'password123'), -- Employee
-    ('Alexander', 'Logan', 'Harris', 4, 'alexander@example.com', 'password123'), -- Employee
-    ('Isabella', 'Mia', 'King', 1, 'isabella@example.com', 'password123'), -- User
-    ('Lucas', 'Leo', 'Evans', 4, 'lucas@example.com', 'password123'), -- Employee
-    ('Amelia', 'Harper', 'Wright', 1, 'amelia@example.com', 'password123'), -- User
-    ('Ethan', 'Matthew', 'Morris', 1, 'ethan@example.com', 'password123'), -- User
-    ('Michael', 'David', 'Allen', 4, 'michael@example.com', 'password123'), -- Employee
-    ('Ava', 'Sophia', 'Parker', 1, 'ava@example.com', 'password123'), -- User
-    ('Jacob', 'Matthew', 'Turner', 1, 'jacob@example.com', 'password123'), -- User
-    ('Emily', 'Grace', 'Scott', 1, 'emily@example.com', 'password123'), -- User
-    ('Ryan', 'Oliver', 'Adams', 4, 'ryan@example.com', 'password123'), -- Employee
-    ('Mia', 'Lily', 'Jenkins', 1, 'mia@example.com', 'password123'), -- User
-    ('Daniel', 'William', 'Bennett', 2, 'daniel@example.com', 'password123'); -- Corporate
-
-
 # ACCOUNT TYPES
-INSERT INTO account_type (account_type)
+INSERT INTO account_type (account_type_role)
 VALUES ('user'),
        ('corporate'),
        ('dealer'),
