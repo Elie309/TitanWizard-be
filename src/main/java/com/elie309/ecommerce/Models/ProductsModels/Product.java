@@ -1,15 +1,44 @@
 package com.elie309.ecommerce.Models.ProductsModels;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.sql.Timestamp;
 
 public class Product {
+
+    @JsonAlias("productId")
+    @JsonProperty(value = "id")
+    @JsonIgnore
     private Long productId;
+
+    @JsonAlias("productTitle")
+    @JsonProperty(value = "title")
     private String productTitle;
+
+    @JsonAlias("productDescription")
+    @JsonProperty(value = "description")
     private String productDescription;
+
+    @JsonAlias("productSku")
+    @JsonProperty(value = "sku")
     private String productSku;
+
+    @JsonAlias("productCategoryId")
+    @JsonProperty(value = "categoryId")
     private Long productCategoryId;
+
+    @JsonAlias("productSubcategoryId")
+    @JsonProperty(value = "subcategoryId")
     private Long productSubcategoryId;
+
+    @JsonAlias("productCreatedAt")
+    @JsonProperty(value ="createdAt", access = JsonProperty.Access.READ_ONLY)
     private Timestamp productCreatedAt;
+
+    @JsonAlias("productUpdatedAt")
+    @JsonProperty(value ="updatedAt", access = JsonProperty.Access.READ_ONLY)
     private Timestamp productUpdatedAt;
 
 
