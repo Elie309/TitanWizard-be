@@ -110,9 +110,9 @@ CREATE TABLE IF NOT EXISTS product_subcategory
 CREATE TABLE IF NOT EXISTS product
 (
     product_id             INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    product_title          CHAR(255)    NOT NULL,
+    product_title          VARCHAR(255) NOT NULL,
     product_description    LONGTEXT,
-    product_sku            CHAR(50)     NULL     DEFAULT '',
+    product_sku            VARCHAR(50) UNIQUE NOT NULL,
 
     product_category_id    INT UNSIGNED NOT NULL,
     product_subcategory_id INT UNSIGNED,
