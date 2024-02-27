@@ -48,6 +48,6 @@ public class AccountController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteAccount(@PathVariable Long id) {
          accountRepository.delete(id);
-         return ResponseEntity.ok(new Response("Deleted Succeffully", true));
+         return ResponseEntity.ok(new Response("Record Deleted", true));
     }
 }

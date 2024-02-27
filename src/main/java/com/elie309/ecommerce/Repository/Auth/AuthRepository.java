@@ -34,9 +34,9 @@ public class AuthRepository {
 
         account.setAccountPassword(passwordEncoder.encode(account.getAccountPassword()));
         //It will throw an error if something happens
-        accountRepository.save(account);
+        Account updatedAccount = accountRepository.save(account);
 
-        UserInfoUserDetails userDetails = new UserInfoUserDetails(account);
+        UserInfoUserDetails userDetails = new UserInfoUserDetails(updatedAccount);
 
         String jwtToken = jwtService.generateToken(userDetails);
         return AuthResponse.build(jwtToken);

@@ -72,7 +72,7 @@ public class AccountRepository implements IRepository<Account> {
 
             account.setAccountType(accountType);
 
-            String sql = "INSERT INTO account (account_firstname, account_middlename, account_lastname, " + "account_type_id, account_email, account_password) " + "VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO account (account_firstname, account_middlename, account_lastname, account_type_id, account_email, account_password) VALUES (?, ?, ?, ?, ?, ?)";
 
             int res = jdbcTemplate.update(sql, account.getAccountFirstname(), account.getAccountMiddlename(), account.getAccountLastname(), account.getAccountType().getAccountTypeId(), account.getAccountEmail(), account.getAccountPassword());
 
@@ -89,7 +89,7 @@ public class AccountRepository implements IRepository<Account> {
 
     @Override
     public Account update(Account account) {
-        String sql = "UPDATE account SET account_firstname = ?, account_middlename = ?, account_lastname = ?, " + "account_email = ? " + "WHERE account_id = ?";
+        String sql = "UPDATE account SET account_firstname = ?, account_middlename = ?, account_lastname = ?, account_email = ? WHERE account_id = ?";
         try {
 
             int res = jdbcTemplate.update(sql, account.getAccountFirstname(), account.getAccountMiddlename(), account.getAccountLastname(), account.getAccountEmail(), account.getAccountId());
@@ -100,7 +100,7 @@ public class AccountRepository implements IRepository<Account> {
             JdbcErrorHandler.errorHandler(e);
         }
 
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Record not updated");
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Record not updated, Invalid data");
 
 
     }

@@ -47,57 +47,25 @@ public class Account {
     }
 
     //#region Setters and getters
+
     public Long getAccountId() {
         return accountId;
-    }
-
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
     }
 
     public String getAccountFirstname() {
         return accountFirstname;
     }
 
-    public void setAccountFirstname(String accountFirstname) {
-        this.accountFirstname = accountFirstname;
-    }
-
     public String getAccountMiddlename() {
         return accountMiddlename;
-    }
-
-    public void setAccountMiddlename(String accountMiddlename) {
-        this.accountMiddlename = accountMiddlename;
     }
 
     public String getAccountLastname() {
         return accountLastname;
     }
 
-    public void setAccountLastname(String accountLastname) {
-        this.accountLastname = accountLastname;
-    }
-
-    public Timestamp getAccountCreatedAt() {
-        return accountCreatedAt;
-    }
-
-    public void setAccountCreatedAt(Timestamp accountCreatedAt) {
-        this.accountCreatedAt = accountCreatedAt;
-    }
-
-    public Timestamp getAccountUpdatedAt() {
-        return accountUpdatedAt;
-    }
-
-    public void setAccountUpdatedAt(Timestamp accountUpdatedAt) {
-        this.accountUpdatedAt = accountUpdatedAt;
-    }
-
-
-    public void setAccountEmail(String accountEmail) {
-        this.accountEmail = accountEmail;
+    public AccountType getAccountType() {
+        return accountType;
     }
 
     public String getAccountEmail() {
@@ -108,20 +76,85 @@ public class Account {
         return accountPassword;
     }
 
-    public void setAccountPassword(String accountPassword) {
-        this.accountPassword = accountPassword;
+    public Timestamp getAccountCreatedAt() {
+        return accountCreatedAt;
     }
 
-    public AccountType getAccountType() {
-        return accountType;
+    public Timestamp getAccountUpdatedAt() {
+        return accountUpdatedAt;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
+
+    public void setAccountFirstname(String accountFirstname) {
+        this.accountFirstname = accountFirstname;
+    }
+
+    public void setAccountMiddlename(String accountMiddlename) {
+        this.accountMiddlename = accountMiddlename;
+    }
+
+    public void setAccountLastname(String accountLastname) {
+        this.accountLastname = accountLastname;
     }
 
     public void setAccountType(AccountType accountType) {
         this.accountType = accountType;
     }
 
-//#endregion
+    public void setAccountEmail(String accountEmail) {
+        this.accountEmail = accountEmail;
+    }
 
+    public void setAccountPassword(String accountPassword) {
+        this.accountPassword = accountPassword;
+    }
+
+    public void setAccountCreatedAt(Timestamp accountCreatedAt) {
+        this.accountCreatedAt = accountCreatedAt;
+    }
+
+    public void setAccountUpdatedAt(Timestamp accountUpdatedAt) {
+        this.accountUpdatedAt = accountUpdatedAt;
+    }
+
+
+    //#endregion
+
+    //#region Methods
+
+    public static boolean isValid(Account account) {
+        if (account == null) {
+            return false;
+        }
+
+        if (account.getAccountFirstname() == null || account.getAccountFirstname().isEmpty()) {
+            return false;
+        }
+        if (account.getAccountLastname() == null || account.getAccountLastname().isEmpty()) {
+            return false;
+        }
+        if (account.getAccountEmail() == null || !isValidEmail(account.getAccountEmail())) {
+            return false;
+        }
+        return account.getAccountPassword() != null && isValidPassword(account.getAccountPassword());
+    }
+
+    private static boolean isValidPassword(String password){
+        //USE password.matches("REGULAR EXPRESSION");;
+        return password.length() >= 8;
+
+    }
+
+    private static boolean isValidEmail(String email) {
+
+        //USE email.matches("REGULAR EXPRESSION");
+        return email.contains("@") && email.contains(".");
+    }
+
+    //#endregion
 
     @Override
     public String toString() {

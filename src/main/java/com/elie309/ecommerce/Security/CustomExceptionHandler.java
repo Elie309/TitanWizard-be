@@ -21,7 +21,7 @@ public class CustomExceptionHandler {
         ProblemDetail errorDetails = ProblemDetail.forStatus(500);
 
         if( ex instanceof BadCredentialsException){
-             errorDetails = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(401), ex.getMessage());
+             errorDetails = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(400), ex.getMessage());
 
             errorDetails.setProperty("access_denied_reason", "Bad Credentials");
 

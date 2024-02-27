@@ -23,4 +23,11 @@ public class LoginRequest {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public static boolean isValid(LoginRequest loginRequest) {
+        if (loginRequest.email == null || loginRequest.email.isEmpty()) {
+            return false;
+        }
+        return loginRequest.password != null && !loginRequest.password.isEmpty();
+    }
 }
