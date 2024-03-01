@@ -5,8 +5,8 @@ INSERT INTO account_type (account_type_role)
 VALUES ('user'),
        ('corporate'),
        ('dealer'),
-       ('employee'),
-       ('administrator');
+       ('staff'),
+       ('admin');
 
 
 # ADDRESS TYPE
