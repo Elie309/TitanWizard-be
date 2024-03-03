@@ -1,9 +1,9 @@
-package com.elie309.ecommerce.Controllers.AuthController;
+package com.elie309.ecommerce.controllers.authController;
 
-import com.elie309.ecommerce.Models.AccountsModels.Account;
-import com.elie309.ecommerce.Repository.Auth.AuthRepository;
-import com.elie309.ecommerce.Security.Auth.Models.AuthResponse;
-import com.elie309.ecommerce.Security.Auth.Models.LoginRequest;
+import com.elie309.ecommerce.models.accountsModels.Account;
+import com.elie309.ecommerce.repository.authRepository.AuthRepository;
+import com.elie309.ecommerce.security.auth.Models.AuthResponse;
+import com.elie309.ecommerce.security.auth.Models.LoginRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +31,14 @@ public class AuthController {
     @PostMapping
     public ResponseEntity<AuthResponse> register(@RequestBody Account account){
 
-        if(!Account.isValid(account)){
-            throw new ResponseStatusException( HttpStatus.BAD_REQUEST, "Firstname, lastname, email & passord are required. Password should be at least of 8 charaters");
+        if(account.isValid()){
+            throw new ResponseStatusException( HttpStatus.BAD_REQUEST, "First name, last name and email are required.");
         }
+
+        if(!account.isValidPassword()){
+            throw new ResponseStatusException( HttpStatus.BAD_REQUEST, "Password must be at least 8 characters long.");
+        }
+
         return new ResponseEntity<>(authRepository.register(account), HttpStatus.CREATED);
     }
 }

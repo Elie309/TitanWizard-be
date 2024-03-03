@@ -1,6 +1,6 @@
-package com.elie309.ecommerce.Security.Auth;
+package com.elie309.ecommerce.security.auth;
 
-import com.elie309.ecommerce.Repository.AccountRepository.AccountRepository;
+import com.elie309.ecommerce.repository.accountRepository.AccountRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

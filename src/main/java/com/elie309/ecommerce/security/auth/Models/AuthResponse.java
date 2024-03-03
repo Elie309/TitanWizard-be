@@ -1,4 +1,4 @@
-package com.elie309.ecommerce.Security.Auth.Models;
+package com.elie309.ecommerce.security.auth.Models;
 
 public record AuthResponse(String token) {
 

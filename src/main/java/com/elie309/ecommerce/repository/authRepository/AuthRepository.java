@@ -1,11 +1,11 @@
-package com.elie309.ecommerce.Repository.Auth;
+package com.elie309.ecommerce.repository.authRepository;
 
-import com.elie309.ecommerce.Models.AccountsModels.Account;
-import com.elie309.ecommerce.Repository.AccountRepository.AccountRepository;
-import com.elie309.ecommerce.Security.Auth.Models.AuthResponse;
-import com.elie309.ecommerce.Security.Auth.Models.LoginRequest;
-import com.elie309.ecommerce.Security.Auth.Models.UserInfoUserDetails;
-import com.elie309.ecommerce.Security.JWT.JwtService;
+import com.elie309.ecommerce.models.accountsModels.Account;
+import com.elie309.ecommerce.repository.accountRepository.AccountRepository;
+import com.elie309.ecommerce.security.auth.Models.AuthResponse;
+import com.elie309.ecommerce.security.auth.Models.LoginRequest;
+import com.elie309.ecommerce.security.auth.Models.UserInfoUserDetails;
+import com.elie309.ecommerce.security.jwt.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
