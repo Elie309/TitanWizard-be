@@ -1,12 +1,13 @@
-package com.elie309.ecommerce.Controllers.ProductsController;
+package com.elie309.titanwizard.controllers.productController;
 
-import com.elie309.ecommerce.Models.ProductsModels.Product;
-import com.elie309.ecommerce.Repository.ProductsRepository.ProductRepository;
-import com.elie309.ecommerce.Utils.Response;
+import com.elie309.titanwizard.models.productsModels.Product;
+import com.elie309.titanwizard.repository.productsRepository.ProductRepository;
+import com.elie309.titanwizard.utils.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class ProductController {
     }
 
     @GetMapping("{id}")
-    @PreAuthorize("hasRole('USER')")
+//    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         return ResponseEntity.ok(productRepository.findById(id));
     }
@@ -35,14 +36,22 @@ public class ProductController {
     @PostMapping
     @PreAuthorize("hasRole('STAFF')")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        if(product.isNotValid()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product fields are invalid or empty.");
+        }
         return new ResponseEntity<>(productRepository.save(product), HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
     @PreAuthorize("hasRole('STAFF')")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+    public ResponseEntity<Response> updateProduct(@PathVariable Long id, @RequestBody Product product) {
         product.setProductId(id);
-        return ResponseEntity.ok(productRepository.update(product));
+        if(product.isNotValid()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product fields are invalid or empty.");
+        }
+        productRepository.update(product);
+        return ResponseEntity.ok(new Response("Record updated",true));
+
     }
 
     @DeleteMapping("/{id}")

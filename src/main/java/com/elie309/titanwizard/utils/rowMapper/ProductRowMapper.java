@@ -1,7 +1,7 @@
-package com.elie309.ecommerce.utils.rowMapper;
+package com.elie309.titanwizard.utils.rowMapper;
 
 
-import com.elie309.ecommerce.models.productsModels.Product;
+import com.elie309.titanwizard.models.productsModels.Product;
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;

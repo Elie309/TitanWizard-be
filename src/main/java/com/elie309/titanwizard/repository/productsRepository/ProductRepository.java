@@ -1,9 +1,9 @@
-package com.elie309.ecommerce.Repository.ProductsRepository;
+package com.elie309.titanwizard.repository.productsRepository;
 
-import com.elie309.ecommerce.Exceptions.JdbcErrorHandler;
-import com.elie309.ecommerce.Models.ProductsModels.Product;
-import com.elie309.ecommerce.Repository.IRepository;
-import com.elie309.ecommerce.Utils.RowMapper.ProductRowMapper;
+import com.elie309.titanwizard.exceptions.JdbcErrorHandler;
+import com.elie309.titanwizard.models.productsModels.Product;
+import com.elie309.titanwizard.repository.IRepository;
+import com.elie309.titanwizard.utils.rowMapper.ProductRowMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -57,7 +57,7 @@ public class ProductRepository implements IRepository<Product> {
 
             int res = jdbcTemplate.update(sql, product.getProductTitle(), product.getProductDescription(), product.getProductSku(), product.getProductCategoryId(), product.getProductSubcategoryId());
 
-            if (res != 0) {
+            if (res == 1) {
                 return product;
             }
 
@@ -69,22 +69,20 @@ public class ProductRepository implements IRepository<Product> {
     }
 
     @Override
-    public Product update(Product product) {
+    public void update(Product product) {
 
         String sql = "UPDATE product SET product_title = ?, product_description = ?, product_sku = ?, " + "product_category_id = ?, product_subcategory_id = ? " + "WHERE product_id = ?";
         try {
 
             int res = jdbcTemplate.update(sql, product.getProductTitle(), product.getProductDescription(), product.getProductSku(), product.getProductCategoryId(), product.getProductSubcategoryId(), product.getProductId());
 
-            if (res != 0) {
-                return product;
+            if (res != 1) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Record not updated");
             }
 
         } catch (Exception e) {
             JdbcErrorHandler.errorHandler(e);
         }
-
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product not updated");
 
     }
 
@@ -96,8 +94,8 @@ public class ProductRepository implements IRepository<Product> {
 
             int res = jdbcTemplate.update(sql, productId);
 
-            if (res == 0) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not Found");
+            if (res != 1) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Record not found");
             }
 
         } catch (Exception e) {
