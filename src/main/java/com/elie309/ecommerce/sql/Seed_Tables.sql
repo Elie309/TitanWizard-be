@@ -1,4 +1,4 @@
-Use ecommerce;
+Use titanwizard;
 
 # ACCOUNT TYPES
 INSERT INTO account_type (account_type_role)

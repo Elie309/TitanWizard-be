@@ -1,10 +1,10 @@
-CREATE SCHEMA IF NOT EXISTS ecommerce;
-USE ecommerce;
+CREATE SCHEMA IF NOT EXISTS titanwizard;
+USE titanwizard;
 
 CREATE TABLE IF NOT EXISTS account_type
 (
-    account_type_id         INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    account_type_role       CHAR(30) UNIQUE NOT NULL
+    account_type_id   INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    account_type_role CHAR(30) UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `account`
@@ -90,18 +90,18 @@ CREATE TABLE IF NOT EXISTS address
 CREATE TABLE IF NOT EXISTS product_category
 (
     product_category_id         INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    product_category            CHAR(50)  NOT NULL,
-    product_category_created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    product_category_updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    product_category            VARCHAR(50) UNIQUE NOT NULL,
+    product_category_created_at TIMESTAMP          NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    product_category_updated_at TIMESTAMP          NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS product_subcategory
 (
     product_subcategory_id         INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    product_category_id            INT UNSIGNED NOT NULL,
-    product_subcategory            CHAR(50)     NOT NULL,
-    product_subcategory_created_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    product_subcategory_updated_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    product_category_id            INT UNSIGNED       NOT NULL,
+    product_subcategory            VARCHAR(50) UNIQUE NOT NULL,
+    product_subcategory_created_at TIMESTAMP          NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    product_subcategory_updated_at TIMESTAMP          NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     FOREIGN KEY (product_category_id) REFERENCES product_category (product_category_id)
 );
@@ -110,15 +110,15 @@ CREATE TABLE IF NOT EXISTS product_subcategory
 CREATE TABLE IF NOT EXISTS product
 (
     product_id             INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    product_title          VARCHAR(255) NOT NULL,
+    product_title          VARCHAR(255)       NOT NULL,
     product_description    LONGTEXT,
     product_sku            VARCHAR(50) UNIQUE NOT NULL,
 
-    product_category_id    INT UNSIGNED NOT NULL,
+    product_category_id    INT UNSIGNED       NOT NULL,
     product_subcategory_id INT UNSIGNED,
 
-    product_created_at     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    product_updated_at     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    product_created_at     TIMESTAMP          NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    product_updated_at     TIMESTAMP          NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     FOREIGN KEY (product_category_id) REFERENCES product_category (product_category_id),
     FOREIGN KEY (product_subcategory_id) REFERENCES product_subcategory (product_subcategory_id)
