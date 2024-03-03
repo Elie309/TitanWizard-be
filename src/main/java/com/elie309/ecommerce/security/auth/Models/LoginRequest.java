@@ -1,4 +1,4 @@
-package com.elie309.ecommerce.Security.Auth.Models;
+package com.elie309.ecommerce.security.auth.Models;
 
 public class LoginRequest {
 
@@ -25,6 +25,7 @@ public class LoginRequest {
     }
 
     public static boolean isValid(LoginRequest loginRequest) {
+        //No need to validate password other than if it is empty since its is a login
         if (loginRequest.email == null || loginRequest.email.isEmpty()) {
             return false;
         }

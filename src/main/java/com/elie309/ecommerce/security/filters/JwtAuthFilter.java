@@ -1,7 +1,7 @@
-package com.elie309.ecommerce.Security.Filters;
+package com.elie309.ecommerce.security.filters;
 
-import com.elie309.ecommerce.Security.Auth.UserInfoUserDetailsService;
-import com.elie309.ecommerce.Security.JWT.JwtService;
+import com.elie309.ecommerce.security.auth.UserInfoUserDetailsService;
+import com.elie309.ecommerce.security.jwt.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

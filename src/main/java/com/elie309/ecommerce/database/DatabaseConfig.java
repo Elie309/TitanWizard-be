@@ -1,4 +1,4 @@
-package com.elie309.ecommerce.Database;
+package com.elie309.ecommerce.database;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

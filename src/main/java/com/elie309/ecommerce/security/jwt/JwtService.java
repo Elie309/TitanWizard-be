@@ -1,4 +1,4 @@
-package com.elie309.ecommerce.Security.JWT;
+package com.elie309.ecommerce.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

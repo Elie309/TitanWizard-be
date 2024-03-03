@@ -1,4 +1,4 @@
-package com.elie309.ecommerce.Utils;
+package com.elie309.ecommerce.utils;
 
 public class Response {
 
