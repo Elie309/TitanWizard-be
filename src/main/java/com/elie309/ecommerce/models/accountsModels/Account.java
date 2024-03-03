@@ -1,4 +1,4 @@
-package com.elie309.ecommerce.Models.AccountsModels;
+package com.elie309.ecommerce.models.accountsModels;
 
 
 import com.fasterxml.jackson.annotation.JsonAlias;
@@ -125,33 +125,28 @@ public class Account {
 
     //#region Methods
 
-    public static boolean isValid(Account account) {
-        if (account == null) {
-            return false;
-        }
+    public boolean isValid() {
 
-        if (account.getAccountFirstname() == null || account.getAccountFirstname().isEmpty()) {
-            return false;
+        //WE ARE NOT CHECKING THE PASSWORD
+
+        if (this.getAccountFirstname() == null || this.getAccountFirstname().isEmpty()) {
+            return true;
         }
-        if (account.getAccountLastname() == null || account.getAccountLastname().isEmpty()) {
-            return false;
+        if (this.getAccountLastname() == null || this.getAccountLastname().isEmpty()) {
+            return true;
         }
-        if (account.getAccountEmail() == null || !isValidEmail(account.getAccountEmail())) {
-            return false;
-        }
-        return account.getAccountPassword() != null && isValidPassword(account.getAccountPassword());
+        return this.getAccountEmail() == null || !this.isValidEmail();
     }
 
-    private static boolean isValidPassword(String password){
-        //USE password.matches("REGULAR EXPRESSION");;
-        return password.length() >= 8;
+    public boolean isValidPassword(){
+        //TODO: USE password.matches("REGULAR EXPRESSION");;
+        return this.getAccountPassword().length() >= 8;
 
     }
 
-    private static boolean isValidEmail(String email) {
-
-        //USE email.matches("REGULAR EXPRESSION");
-        return email.contains("@") && email.contains(".");
+    public boolean isValidEmail() {
+        //TODO: USE email.matches("REGULAR EXPRESSION");
+        return this.getAccountEmail().contains("@");
     }
 
     //#endregion

@@ -1,4 +1,4 @@
-package com.elie309.ecommerce.Models.AccountsModels;
+package com.elie309.ecommerce.models.accountsModels;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;

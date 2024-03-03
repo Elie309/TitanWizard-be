@@ -1,8 +1,8 @@
-package com.elie309.ecommerce.Repository.AccountRepository;
+package com.elie309.ecommerce.repository.accountRepository;
 
-import com.elie309.ecommerce.Models.AccountsModels.AccountType;
-import com.elie309.ecommerce.Repository.IRepository;
-import com.elie309.ecommerce.Utils.RowMapper.AccountTypeRowMapper;
+import com.elie309.ecommerce.models.accountsModels.AccountType;
+import com.elie309.ecommerce.repository.IRepository;
+import com.elie309.ecommerce.utils.rowMapper.AccountTypeRowMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -44,7 +44,7 @@ public class AccountTypeRepository implements IRepository<AccountType> {
     }
 
     @Override
-    public AccountType update(AccountType accountType) {
+    public void update(AccountType accountType) {
         throw new ResponseStatusException(HttpStatus.FORBIDDEN);
     }
 

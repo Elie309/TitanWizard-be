@@ -1,6 +1,6 @@
-package com.elie309.ecommerce.Utils.RowMapper;
+package com.elie309.ecommerce.utils.rowMapper;
 
-import com.elie309.ecommerce.Models.AccountsModels.AccountType;
+import com.elie309.ecommerce.models.accountsModels.AccountType;
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,8 +1,8 @@
-package com.elie309.ecommerce.Controllers.AccountsController;
+package com.elie309.ecommerce.controllers.accountsController;
 
-import com.elie309.ecommerce.Models.AccountsModels.Account;
-import com.elie309.ecommerce.Repository.AccountRepository.AccountRepository;
-import com.elie309.ecommerce.Utils.Response;
+import com.elie309.ecommerce.models.accountsModels.Account;
+import com.elie309.ecommerce.repository.accountRepository.AccountRepository;
+import com.elie309.ecommerce.utils.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,22 +30,22 @@ public class AccountController {
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('STAFF')")
     public ResponseEntity<Account> getAccountById(@PathVariable Long id) {
-
         Account account = accountRepository.findById(id);
-
-        if(account == null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Record not found");
-        }
-
         return ResponseEntity.ok(account);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Account> updateAccount(@PathVariable Long id, @RequestBody Account account) {
+    public ResponseEntity<Response> updateAccount(@PathVariable Long id, @RequestBody Account account) {
+
         account.setAccountId(id);
-        Account newAccount = accountRepository.update(account);
-        return new ResponseEntity<>(newAccount, HttpStatus.OK);
+
+        if(account.isValid()){ //it doesn't check the password since it cannot be change this way
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Account updates are invalid.");
+        }
+
+        accountRepository.update(account);
+        return ResponseEntity.ok(new Response("Record updated", true));
     }
 
 
