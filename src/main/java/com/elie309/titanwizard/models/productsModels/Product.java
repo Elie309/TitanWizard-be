@@ -1,4 +1,4 @@
-package com.elie309.ecommerce.Models.ProductsModels;
+package com.elie309.titanwizard.models.productsModels;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.sql.Timestamp;
 
 public class Product {
+
+    //#region Fields
 
     @JsonAlias("productId")
     @JsonProperty(value = "id")
@@ -41,9 +43,11 @@ public class Product {
     @JsonProperty(value ="updatedAt", access = JsonProperty.Access.READ_ONLY)
     private Timestamp productUpdatedAt;
 
+    //#endregion
 
     public Product() {}
 
+    //#region Getters & Setters
 
     public Long getProductId() {
         return productId;
@@ -108,4 +112,29 @@ public class Product {
     public void setProductUpdatedAt(Timestamp productUpdatedAt) {
         this.productUpdatedAt = productUpdatedAt;
     }
+
+    //#endregion
+
+
+    //#region Methods
+
+    /**
+     * Return false if the product is valid and true if it invalid.
+     * @return boolean
+     */
+    public boolean isNotValid() {
+        // Check if any of the required fields is null
+        return isEmptyOrNull(productTitle) ||
+                isEmptyOrNull(productSku) ||
+                productCategoryId == null ||
+                productSubcategoryId == null;
+    }
+
+    private boolean isEmptyOrNull(String str) {
+        return str == null || str.trim().isEmpty();
+    }
+
+    //#endregion
+
+
 }
