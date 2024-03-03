@@ -1,4 +1,4 @@
-package com.elie309.ecommerce.Security;
+package com.elie309.ecommerce.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -18,45 +18,39 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ProblemDetail exceptionHandler(Exception ex){
-        ProblemDetail errorDetails = ProblemDetail.forStatus(500);
+        ProblemDetail errorDetails;
 
         if( ex instanceof BadCredentialsException){
              errorDetails = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(400), ex.getMessage());
 
             errorDetails.setProperty("access_denied_reason", "Bad Credentials");
 
-        }
-
-        if(ex instanceof AccessDeniedException){
+        }else if(ex instanceof AccessDeniedException){
             errorDetails = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), ex.getMessage());
 
             errorDetails.setProperty("access_denied_reason", "Not authorized");
-        }
-
-        if (ex instanceof SignatureException || ex instanceof MalformedJwtException) {
+        }else if (ex instanceof SignatureException || ex instanceof MalformedJwtException) {
             errorDetails = ProblemDetail
                     .forStatusAndDetail(HttpStatus.FORBIDDEN, ex.getMessage());
             errorDetails.setProperty("access_denied_reason", "JWT Signature not valid");
-        }
-        if (ex instanceof ExpiredJwtException) {
+        }else if (ex instanceof ExpiredJwtException) {
             errorDetails = ProblemDetail
                     .forStatusAndDetail(HttpStatus.FORBIDDEN, ex.getMessage());
             errorDetails.setProperty("access_denied_reason", "JWT Token already expired !");
-        }
-
-        if(ex instanceof ResponseStatusException){
+        }else if(ex instanceof ResponseStatusException){
             errorDetails = ProblemDetail
                     .forStatusAndDetail(((ResponseStatusException) ex).getStatusCode(), ex.getMessage());
             errorDetails.setProperty("access_denied_reason", ex.getMessage());
-        }
-
-        if(ex instanceof IllegalArgumentException){
+        }else if (ex instanceof IllegalArgumentException){
 
             errorDetails = ProblemDetail
                     .forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
             errorDetails.setProperty("access_denied_reason", ex.getMessage());
 
+        }else {
+            errorDetails = ProblemDetail.forStatus(500);
         }
+
 
         return errorDetails;
     }
