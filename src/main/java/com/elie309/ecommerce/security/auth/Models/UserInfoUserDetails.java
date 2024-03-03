@@ -1,6 +1,6 @@
-package com.elie309.ecommerce.Security.Auth.Models;
+package com.elie309.ecommerce.security.auth.Models;
 
-import com.elie309.ecommerce.Models.AccountsModels.Account;
+import com.elie309.ecommerce.models.accountsModels.Account;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,6 +1,6 @@
-package com.elie309.ecommerce.Security;
+package com.elie309.ecommerce.security;
 
-import com.elie309.ecommerce.Security.Filters.JwtAuthFilter;
+import com.elie309.ecommerce.security.filters.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
