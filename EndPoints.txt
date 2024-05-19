@@ -1,0 +1,16 @@
+Product Category Endpoints:
+
+GET /product-categories: Get all product categories.
+GET /product-categories/{id}: Get a specific product category by ID.
+POST /product-categories: Create a new product category.
+PUT /product-categories/{id}: Update an existing product category.
+DELETE /product-categories/{id}: Delete a product category by ID.
+
+Product Subcategory Endpoints:
+
+GET /product-subcategories: Get all product subcategories.
+GET /product-subcategories/{id}: Get a specific product subcategory by ID.
+GET /product-subcategories/by-category/{categoryId}: Get all product subcategories for a specific product category.
+POST /product-subcategories: Create a new product subcategory.
+PUT /product-subcategories/{id}: Update an existing product subcategory.
+DELETE /product-subcategories/{id}: Delete a product subcategory by ID.
